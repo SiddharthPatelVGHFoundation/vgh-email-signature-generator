@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGH Foundation Email Signature Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://vghfoundation.ca/wp-content/uploads/2025/10/2025_FDN_Video_BG_2.png') center top / cover no-repeat fixed;
+            min-height: 100vh;
+            padding: 120px 20px 40px 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #52cc6c 0%, #3da856 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        .form-section {
+            padding-right: 20px;
+            border-right: 2px solid #f0f0f0;
+        }
+        
+        .preview-section {
+            padding-left: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #52cc6c;
+            box-shadow: 0 0 0 3px rgba(82, 204, 108, 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #52cc6c 0%, #3da856 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(82, 204, 108, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .preview-box {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 400px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .alert {
+            padding: 12px;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            color: #155724;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .section-divider {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .section-title {
+            color: #667eea;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-section {
+                border-right: none;
+                border-bottom: 2px solid #f0f0f0;
+                padding-right: 0;
+                padding-bottom: 20px;
+            }
+            
+            .preview-section {
+                padding-left: 0;
+                padding-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 VGH Foundation Email Signature Generator</h1>
+            <p>Fill in your details below to generate your personalized email signature</p>
+        </div>
+        
+        <div class="content">
+            <div class="form-section">
+                <form id="signatureForm">
+                    <div class="form-group">
+                        <label for="firstname">First Name *</label>
+                        <input type="text" id="firstname" required placeholder="John">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastname">Last Name *</label>
+                        <input type="text" id="lastname" required placeholder="Smith">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="designations">Designations/Pronouns</label>
+                        <input type="text" id="designations" placeholder="MBA, He/Him (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jobtitle">Job Title *</label>
+                        <input type="text" id="jobtitle" required placeholder="Senior Development Officer">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" placeholder="Major Gifts (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Office Phone</label>
+                        <input type="text" id="phone" placeholder="604-875-4676 (optional)" maxlength="12">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ext">Extension</label>
+                        <input type="text" id="ext" placeholder="64676 (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cell">Cell Phone</label>
+                        <input type="text" id="cell" placeholder="778-123-4567 (optional)" maxlength="12">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required placeholder="john.smith@vghfoundation.ca">
+                    </div>
+                    
+                    <div class="section-divider">
+                        <div class="section-title">Assistant Information (Optional)</div>
+                        
+                        <div class="form-group">
+                            <label for="assistantName">Assistant Name</label>
+                            <input type="text" id="assistantName" placeholder="Jane Doe">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="assistantPhone">Assistant Phone</label>
+                            <input type="text" id="assistantPhone" placeholder="604-875-4676" maxlength="12">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="assistantExt">Assistant Extension</label>
+                            <input type="text" id="assistantExt" placeholder="64676">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="assistantEmail">Assistant Email</label>
+                            <input type="email" id="assistantEmail" placeholder="jane.doe@vghfoundation.ca">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Generate Signature</button>
+                </form>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-title">Preview & Copy</div>
+                <div class="alert" id="copyAlert">✓ Signature copied to clipboard!</div>
+                <div class="preview-box" id="preview">
+                    <p style="color: #999; text-align: center; padding: 50px 20px;">
+                        Fill in the form and click "Generate Signature" to see your signature here
+                    </p>
+                </div>
+                <button type="button" class="btn btn-secondary" id="copyBtn" style="display: none;">Copy to Clipboard</button>
+                <button type="button" class="btn" id="downloadBtn" style="display: none; margin-top: 10px;">Download HTML</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Phone number formatting function
+        function formatPhoneNumber(value) {
+            const cleaned = value.replace(/\D/g, '');
+            
+            if (cleaned.length <= 3) {
+                return cleaned;
+            } else if (cleaned.length <= 6) {
+                return cleaned.slice(0, 3) + '-' + cleaned.slice(3);
+            } else {
+                return cleaned.slice(0, 3) + '-' + cleaned.slice(3, 6) + '-' + cleaned.slice(6, 10);
+            }
+        }
+
+        // Add event listeners for phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            const cursorPosition = e.target.selectionStart;
+            const oldLength = e.target.value.length;
+            e.target.value = formatPhoneNumber(e.target.value);
+            const newLength = e.target.value.length;
+            const diff = newLength - oldLength;
+            e.target.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+        });
+
+        document.getElementById('cell').addEventListener('input', function(e) {
+            const cursorPosition = e.target.selectionStart;
+            const oldLength = e.target.value.length;
+            e.target.value = formatPhoneNumber(e.target.value);
+            const newLength = e.target.value.length;
+            const diff = newLength - oldLength;
+            e.target.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+        });
+
+        document.getElementById('assistantPhone').addEventListener('input', function(e) {
+            const cursorPosition = e.target.selectionStart;
+            const oldLength = e.target.value.length;
+            e.target.value = formatPhoneNumber(e.target.value);
+            const newLength = e.target.value.length;
+            const diff = newLength - oldLength;
+            e.target.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+        });
+
+        function generateSignature(data) {
+            // Build contact line
+            let contactParts = [];
+            if (data.phone) {
+                let phoneText = `T ${data.phone}`;
+                if (data.ext) phoneText += ` EXT ${data.ext}`;
+                contactParts.push(phoneText);
+            }
+            if (data.cell) {
+                contactParts.push(`C ${data.cell}`);
+            }
+            
+            const contactLine = contactParts.length > 0 
+                ? contactParts.join(' | ') + ' | ' 
+                : '';
+            
+            // Build assistant line if any assistant info is provided
+            let assistantLine = '';
+            if (data.assistantName || data.assistantPhone || data.assistantEmail) {
+                let assistantParts = [];
+                if (data.assistantName) {
+                    assistantParts.push(`ASSISTANT: ${data.assistantName.toUpperCase()}`);
+                }
+                if (data.assistantPhone) {
+                    let assistantPhoneText = `T ${data.assistantPhone}`;
+                    if (data.assistantExt) assistantPhoneText += ` EXT ${data.assistantExt}`;
+                    assistantParts.push(assistantPhoneText);
+                }
+                if (data.assistantEmail) {
+                    assistantParts.push(`EMAIL <a href="mailto:${data.assistantEmail}" style="color:#52cc6c;text-decoration:none;">${data.assistantEmail.toUpperCase()}</a>`);
+                }
+                assistantLine = `<span style="font-family:Consolas,Courier,monospace;font-size:13px;color:#000;text-transform:uppercase;">${assistantParts.join(' | ')}</span>`;
+            }
+            
+            return `<table border="0" cellspacing="0" cellpadding="0" width="600" style="border-collapse:collapse;margin:0;padding:0;">
+    <tr>
+        <td width="600" style="padding:0 0 16px 0;">
+            <span style="font-family:Aptos,Arial,Verdana,Sans-Serif;font-size:19px;color:#000;"><b>${data.firstname} ${data.lastname}</b></span>${data.designations ? '<span style="font-family:Aptos,Arial,Verdana,Sans-Serif;font-size:15px;color:#000;"> ' + data.designations + '</span>' : ''}<br>
+            <span style="font-family:Aptos,Arial,Verdana,Sans-Serif;font-size:15px;color:#000;">${data.jobtitle}${data.department ? ', ' + data.department : ''}</span>
+        </td>
+    </tr>
+    <tr>
+        <td width="600" style="padding:8px 0 0 0;">
+            <span style="font-family:Consolas,Courier,monospace;font-size:13px;color:#000;text-transform:uppercase;">
+                ${contactLine}<a href="mailto:${data.email}" style="color:#52cc6c;text-decoration:none;">${data.email.toUpperCase()}</a>
+            </span>${assistantLine ? '<br>' + assistantLine : ''}
+            <br><span style="font-family:Consolas,Courier,monospace;font-size:13px;color:#000;text-transform:uppercase;">
+                190-855 WEST 12 AVE, VANCOUVER, BC V5Z 1M9 | <a href="https://vghfoundation.ca?utm_source=outlook&utm_medium=email&utm_campaign=internal_emails&utm_content=signature-link" style="color:#52cc6c;text-decoration:none;">VGHFOUNDATION.CA</a> | <a href="https://www.facebook.com/VGHUBCHospitalFoundation" target="_blank"><img src="https://vghfoundation.ca/wp-content/uploads/2025/10/2025_Social-Logos_DKGreen_FB.png" border="0" alt="Facebook" width="15" height="15" style="vertical-align:middle;margin:0 2px;"></a><a href="https://twitter.com/vghfdn" target="_blank"><img src="https://vghfoundation.ca/wp-content/uploads/2025/10/2025_Social-Logos_DKGreen_X.png" border="0" alt="Twitter" width="15" height="15" style="vertical-align:middle;margin:0 2px;"></a><a href="https://www.youtube.com/user/VGHandUBCHFoundation" target="_blank"><img src="https://vghfoundation.ca/wp-content/uploads/2025/10/2025_Social-Logos_DKGreen_YT.png" border="0" alt="YouTube" width="15" height="15" style="vertical-align:middle;margin:0 2px;"></a><a href="https://instagram.com/vghfdn/" target="_blank"><img src="https://vghfoundation.ca/wp-content/uploads/2025/10/2025_Social-Logos_DKGreen_IG.png" border="0" alt="Instagram" width="15" height="15" style="vertical-align:middle;margin:0 2px;"></a><a href="https://www.linkedin.com/company/vgh-&amp;-ubc-hospital-foundation" target="_blank"><img src="https://vghfoundation.ca/wp-content/uploads/2025/10/2025_Social-Logos_DKGreen_LI.png" border="0" alt="LinkedIn" width="15" height="15" style="vertical-align:middle;margin:0 2px;"></a>
+            </span>
+        </td>
+    </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="610" style="border-collapse:collapse;margin:0;padding:0;">
+    <tr>
+        <td width="610" style="padding:16px 0;">
+            <a href="https://vghfoundation.ca/?utm_medium=email&utm_source=outlook&utm_campaign=VGHplus&utm_content=signatureBanner-VGHplusyou"><img src="https://vghfoundation.ca/wp-content/uploads/2025/09/2025_FDN_E-Signature_PlusYou.png" alt="VGH & UBC Hospital Foundation" width="610" border="0" style="display:block;" /></a>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <span style="font-family:Arial,Verdana,Sans-Serif;font-size:9px;color:#000;">I acknowledge, with gratitude, that my place of work is on the traditional unceded territories of the xʷməθkʷəy̓əm (Musqueam),<br>Sḵwx̱wú7mesh (Squamish) and Səl̓ílwətaʔ/Selilwitulh (Tsleil-waututh) Nations.</span>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:8px 0 0 0;">
+            <a href="https://reviews.canadastop100.com/top-employer-vancouver-general-hospital-university-of-british-columbia-hospital-foundation?lang=en"><img src="https://go.vghfoundation.ca/l/891751/2025-02-06/fqj9f/891751/1738865270VSn4miPi/BC_Top_Employers_130x78.png" alt="BC's Top Employers" width="100" border="0" /></a>
+        </td>
+    </tr>
+</table>`;
+        }
+
+        document.getElementById('signatureForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                firstname: document.getElementById('firstname').value,
+                lastname: document.getElementById('lastname').value,
+                designations: document.getElementById('designations').value || '',
+                jobtitle: document.getElementById('jobtitle').value,
+                department: document.getElementById('department').value || '',
+                phone: document.getElementById('phone').value || '',
+                ext: document.getElementById('ext').value || '',
+                cell: document.getElementById('cell').value || '',
+                email: document.getElementById('email').value,
+                assistantName: document.getElementById('assistantName').value || '',
+                assistantPhone: document.getElementById('assistantPhone').value || '',
+                assistantExt: document.getElementById('assistantExt').value || '',
+                assistantEmail: document.getElementById('assistantEmail').value || ''
+            };
+            
+            const signature = generateSignature(data);
+            document.getElementById('preview').innerHTML = signature;
+            document.getElementById('copyBtn').style.display = 'block';
+            document.getElementById('downloadBtn').style.display = 'block';
+        });
+
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const preview = document.getElementById('preview');
+            
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = preview.innerHTML;
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.left = '-9999px';
+            document.body.appendChild(tempDiv);
+            
+            const range = document.createRange();
+            range.selectNodeContents(tempDiv);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            try {
+                document.execCommand('copy');
+                const alert = document.getElementById('copyAlert');
+                alert.style.display = 'block';
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 3000);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            
+            selection.removeAllRanges();
+            document.body.removeChild(tempDiv);
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const signature = document.getElementById('preview').innerHTML;
+            const blob = new Blob([signature], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'email_signature.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
